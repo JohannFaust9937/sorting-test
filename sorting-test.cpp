@@ -2,9 +2,9 @@
 
 void printArray(const int size, int* const array)
 {
-	printf("\tcontents of an array: ");
+	printf("Contents of an array:\n");
 	for (int index{ 0 }; index != size; ++index)
-		printf("[%i]:%i ", index, array[index]);
+		printf("[%i]:%i\n", index, array[index]);
 }
 
 void bubbleSort(const int size, int* array)
@@ -44,17 +44,46 @@ void selectionSort(const int size, int* array)
 	}
 }
 
+void insertionSort(const int size, int* array)
+{
+	for (int index{ 1 }; index < size; ++index)
+	{
+		int sorted{ index - 1 };
+		while (sorted > -1 && array[sorted] > array[sorted + 1])
+		{
+			int buffer{};
+			buffer = array[sorted];
+			array[sorted] = array[sorted + 1];
+			array[sorted + 1] = buffer;
+			--sorted;
+		}
+	}
+}
+
 int main()
 {
 	const int size{ 10 };
-	int array0[size]{ 0, 9, 1, 8, 2, 7, 3, 6, 4, 5 };
-	printf("Bubble sorting example result -> ");
+
+	// Пузырьковая сортировка
+	int array0[size]{ 0, 9, 1, 8, 5, 5, 3, 6, 4, 5 };
+	printf("Bubble sorting example result\n");
 	bubbleSort(size, array0);
 	printArray(size, array0);
 	printf("\n");
-	int array1[size]{ 0, 9, 1, 8, 2, 7, 3, 6, 4, 5 };
-	printf("Selection sorting example result -> ");
+
+	// Сортировка выбором
+	int array1[size]{ 0, 9, 1, 8, 5, 5, 3, 6, 4, 5 };
+	printf("Selection sorting example result\n");
 	selectionSort(size, array1);
 	printArray(size, array1);
+	printf("\n");
+
+	// Сортировка вставками
+	int array2[size]{ 0, 9, 1, 8, 5, 5, 3, 6, 4, 5 };
+	printf("Insertion sorting example result\n");
+	insertionSort(size, array2);
+	printArray(size, array2);
+	printf("\n");
+
 	return 0;
 }
