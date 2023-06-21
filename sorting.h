@@ -1,7 +1,9 @@
 #pragma once
 #include <cstdio>
 
-void printArray(const int, int* const);
-void bubbleSort(const int, int*);
-void selectionSort(const int, int*);
-void insertionSort(const int, int*);
+void PrintArray(const int, int const[]);
+void BubbleSort(const int, int[]);
+void SelectionSort(const int, int[]);
+void InsertionSort(const int, int[]);
+int subprogramQuickSorting(int[], int, int);
+void QuickSorting(int[], int, int);

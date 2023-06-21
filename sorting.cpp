@@ -1,13 +1,13 @@
 #include "sorting.h"
 
-void printArray(const int size, int* const array)
+void PrintArray(const int size, int const array[])
 {
 	printf("Contents of an array:\n");
 	for (int index{ 0 }; index != size; ++index)
-		printf("[%i]:%i\n", index, array[index]);
+		printf("[%i]:\t%i\n", index + 1, array[index]);
 }
 
-void bubbleSort(const int size, int* array)
+void BubbleSort(const int size, int array[])
 {
 	int lenght{ size };
 	while (lenght != 0)
@@ -25,7 +25,7 @@ void bubbleSort(const int size, int* array)
 	}
 }
 
-void selectionSort(const int size, int* array)
+void SelectionSort(const int size, int array[])
 {
 	for (int index{ 0 }; index != size - 1; ++index)
 	{
@@ -44,7 +44,7 @@ void selectionSort(const int size, int* array)
 	}
 }
 
-void insertionSort(const int size, int* array)
+void InsertionSort(const int size, int array[])
 {
 	for (int index{ 1 }; index < size; ++index)
 	{
@@ -57,5 +57,38 @@ void insertionSort(const int size, int* array)
 			array[sorted + 1] = buffer;
 			--sorted;
 		}
+	}
+}
+
+int subprogramQuickSorting(int array[], int begin, int end)
+{
+	int middle_value{ array[(begin + end) / 2] };
+	while (begin <= end) {
+		while (array[begin] < middle_value)
+			++begin;
+		while (array[end] > middle_value)
+			--end;
+		if (begin <= end)
+		{
+			if (array[begin] != array[end])
+			{
+				int buffer{ array[begin] };
+				array[begin] = array[end];
+				array[end] = buffer;
+			}
+			++begin;
+			--end;
+		}
+	}
+	return begin;
+}
+
+void QuickSorting(int array[], int begin, int end)
+{
+	if (begin < end)
+	{
+		int middle{ subprogramQuickSorting(array, begin, end) };
+		QuickSorting(array, begin, middle - 1);
+		QuickSorting(array, middle, end);
 	}
 }
