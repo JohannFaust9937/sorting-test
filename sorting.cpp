@@ -60,7 +60,7 @@ void InsertionSort(const int size, int array[])
 	}
 }
 
-int subprogramQuickSorting(int array[], int begin, int end)
+int subFastSort(int array[], int begin, int end)
 {
 	int middle_value{ array[(begin + end) / 2] };
 	while (begin <= end) {
@@ -83,12 +83,42 @@ int subprogramQuickSorting(int array[], int begin, int end)
 	return begin;
 }
 
-void QuickSorting(int array[], int begin, int end)
+void FastSort(int array[], int begin, int end)
 {
 	if (begin < end)
 	{
-		int middle{ subprogramQuickSorting(array, begin, end) };
-		QuickSorting(array, begin, middle - 1);
-		QuickSorting(array, middle, end);
+		int middle{ subFastSort(array, begin, end) };
+		FastSort(array, begin, middle - 1);
+		FastSort(array, middle, end);
+	}
+}
+
+int subSimpleFastSort(int array[], int begin, int end)
+{
+	int sorted{ begin };
+	for (int current{ begin }; current < end; ++current)
+	{
+		if (array[current] <= array[end])
+		{
+			int buffer{ array[sorted] };
+			array[sorted] = array[current];
+			array[current] = buffer;
+			++sorted;
+		}
+	}
+	int buffer{ array[sorted] };
+	array[sorted] = array[end];
+	array[end] = buffer;
+	return sorted;
+}
+
+
+void SimpleFastSort(int array[], int begin, int end)
+{
+	if (begin < end)
+	{
+		int current{ subSimpleFastSort(array, begin, end) };
+		SimpleFastSort(array, begin, current - 1);
+		SimpleFastSort(array, current + 1, end);
 	}
 }
